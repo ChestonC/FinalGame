@@ -16,5 +16,24 @@ class Menu extends Phaser.Scene {
             },
             fixedWidth: 0
         }
+        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding, 'Final Game', menuConfig);
+
+        this.add.text(borderUISize + borderPadding + 130, borderUISize + borderPadding + 350, 'Press [SPACE] to Start', menuConfig);
+
+        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 100, 'Use W A S D to move', menuConfig);
+
+        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 150, 'Try to escape each maze', menuConfig);
+
+        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 200, 'Avoid enemies on the way', menuConfig);
+
+        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
+
+    update() {
+        if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
+            this.scene.start('playScene')
+        }
+    }
+
+    
 }
