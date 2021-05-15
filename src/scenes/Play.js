@@ -11,7 +11,7 @@ class Play extends Phaser.Scene {
         this.map1 = new Map(
             this,
             borderUISize + borderPadding,
-            game.config.height - borderUISize*2,
+            game.config.height - borderUISize,
             'map1',
         );
     }
