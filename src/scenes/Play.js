@@ -8,12 +8,6 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-        //this.map1 = new Map(
-        //    this,
-        //    borderUISize + borderPadding,
-        //    game.config.height - borderUISize,
-        //    'map1',
-        //);
         this.map1 = this.add.tileSprite(
             320,
             game.config.height,
