@@ -10,6 +10,7 @@ class Princess extends Phaser.GameObjects.Sprite {
     }
     update() {
 
+        
     }
 
 }
