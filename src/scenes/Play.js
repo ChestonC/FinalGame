@@ -6,6 +6,7 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image('map1', './assets/testmap.png');
         this.load.image('stone', './assets/teststone.png');
+        this.load.image('princess', './assets/testprincess.png');
     }
 
     create() {
@@ -22,6 +23,13 @@ class Play extends Phaser.Scene {
             borderUISize + borderPadding + 450,
             game.config.height - borderUISize*4.6,
             'stone',
+        );
+
+        this.princess = new Princess(
+            this,
+            borderUISize + borderPadding + 315,
+            game.config.height - borderUISize*10,
+            'princess',
         );
     }
 
