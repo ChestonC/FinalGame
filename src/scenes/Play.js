@@ -19,8 +19,8 @@ class Play extends Phaser.Scene {
 
         this.stone = new Stone(
             this,
-            borderUISize + borderPadding,
-            game.config.height - borderUISize*2,
+            borderUISize + borderPadding + 450,
+            game.config.height - borderUISize*4.6,
             'stone',
         );
     }
