@@ -5,6 +5,7 @@ class Play extends Phaser.Scene {
 
     preload() {
         this.load.image('map1', './assets/testmap.png');
+        this.load.image('stone', './assets/teststone.png');
     }
 
     create() {
@@ -14,6 +15,13 @@ class Play extends Phaser.Scene {
             640,
             960,
             'map1'
+        );
+
+        this.stone = new Stone(
+            this,
+            borderUISize + borderPadding,
+            game.config.height - borderUISize*2,
+            'stone',
         );
     }
 
