@@ -45,6 +45,15 @@ class Play extends Phaser.Scene {
     update() {
         if(this.cursors.left.isDown) {
             this.princess.setVelocityX(-this.velocity);
+        } else if(this.cursors.right.isDown) {
+            this.princess.setVelocityX(this.velocity);
+        } else if (this.cursors.up.isDown) {
+            this.princess.setVelocityY(-this.velocity);
+        } else if(this.cursors.down.isDown) {
+            this.princess.setVelocityY(this.velocity);
+        } else {
+            this.princess.body.velocity.x= 0;
+            this.princess.body.velocity.y= 0;
         }
 
        // this.princess.update();
