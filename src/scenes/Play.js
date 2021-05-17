@@ -63,6 +63,7 @@ class Play extends Phaser.Scene {
         // temporary: makes stone invisible on contact
         if(this.checkCollision(this.princess, this.stone)){
             this.stone.alpha= 0;
+            this.sound.play('collect');
         }
     }
 
