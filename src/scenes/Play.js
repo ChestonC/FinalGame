@@ -27,12 +27,6 @@ class Play extends Phaser.Scene {
             'stone',
         );
 
-     /*   this.princess = new Princess(
-            this,
-            borderUISize + borderPadding + 315,
-            game.config.height - borderUISize*10,
-            'princess',
-        ); */
         this.princess= this.physics.add.sprite(borderUISize + borderPadding + 315, game.config.height - borderUISize*10, 'princess',);
 
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
