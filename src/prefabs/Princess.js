@@ -3,29 +3,13 @@ class Princess extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
 
-
+        xSpeed = 0;
+        ySpeed = 0;
     }
     preload() {
         this.load.image('princess', './assets/testprincess.png');
     }
     update() {
-        if (Phaser.input.keyboard.isDown(keyLEFT))
-        {
-            princess.x -= 4;
-        }
-        else if (Phaser.input.keyboard.isDown(keyRIGHT))
-        {
-            princess.x += 4;
-        }
-
-        if (Phaser.input.keyboard.isDown(keyUP))
-        {
-            princess.y -= 4;
-        }
-        else if (Phaser.input.keyboard.isDown(keyDOWN))
-        {
-            princess.y += 4;
-        }
         
     }
 
