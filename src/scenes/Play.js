@@ -42,4 +42,16 @@ class Play extends Phaser.Scene {
     update() {
         
     }
+
+    checkCollision(princess, stone) {
+        if (princess.x < stone.x + stone.width && 
+            princess.x + princess.width > stone.x && 
+            princess.y < stone.y + stone.height &&
+            princess.height + princess.y > stone.y) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
