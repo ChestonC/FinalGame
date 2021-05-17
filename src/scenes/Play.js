@@ -6,7 +6,7 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image('map1', './assets/testmap.png');
         this.load.image('stone', './assets/teststone.png');
-        this.load.image('princess', './assets/testprincess.png');
+        this.load.image('princessFront', './assets/PrincessFront.png');
     }
 
     create() {
@@ -27,7 +27,7 @@ class Play extends Phaser.Scene {
             'stone',
         );
 
-        this.princess= this.physics.add.sprite(borderUISize + borderPadding + 315, game.config.height - borderUISize*10, 'princess',);
+        this.princess= this.physics.add.sprite(borderUISize + borderPadding + 315, game.config.height - borderUISize*10, 'princessFront',);
 
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
