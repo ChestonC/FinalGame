@@ -10,6 +10,8 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        this.velocity= 200;
+
         this.map1 = this.add.tileSprite(
             320,
             game.config.height,
@@ -25,21 +27,27 @@ class Play extends Phaser.Scene {
             'stone',
         );
 
-        this.princess = new Princess(
+     /*   this.princess = new Princess(
             this,
             borderUISize + borderPadding + 315,
             game.config.height - borderUISize*10,
             'princess',
-        );
+        ); */
+        this.princess= this.physics.add.sprite(borderUISize + borderPadding + 315, game.config.height - borderUISize*10, 'princess',);
 
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        this.cursors= this.input.keyboard.createCursorKeys();
     }
 
-
     update() {
+        if(this.cursors.left.isDown) {
+            this.princess.setVelocityX(-this.velocity);
+        }
+
+       // this.princess.update();
         
     }
 }
