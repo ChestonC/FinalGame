@@ -55,6 +55,11 @@ class Play extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 640, 480);
         this.cameras.main.setZoom(4);
         this.cameras.main.startFollow(this.princess);
+
+        // temporary: makes stone invisible on contact
+        if(this.checkCollision(this.princess, this.stone)){
+            this.stone.alpha= 0;
+        }
     }
 
     checkCollision(princess, stone) {
