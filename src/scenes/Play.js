@@ -37,6 +37,7 @@ class Play extends Phaser.Scene {
     }
 
     update() {
+        // Movement for princess
         if(this.cursors.left.isDown) {
             this.princess.setVelocityX(-this.velocity);
         } else if(this.cursors.right.isDown) {
@@ -50,8 +51,10 @@ class Play extends Phaser.Scene {
             this.princess.body.velocity.y= 0;
         }
 
-       // this.princess.update();
-        
+        //sets camera to follow player
+        this.cameras.main.setBounds(0, 0, 640, 480);
+        this.cameras.main.setZoom(4);
+        this.cameras.main.startFollow(this.princess);
     }
 
     checkCollision(princess, stone) {
