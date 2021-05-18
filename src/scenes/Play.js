@@ -7,18 +7,27 @@ class Play extends Phaser.Scene {
         this.load.image('map1', './assets/testmap.png');
         this.load.image('stone', './assets/teststone.png');
         this.load.image('princessFront', './assets/PrincessFront.png');
+        this.load.tilemapTiledJSON('tilemap', './assets/startmap.json');
+        this.load.image('floor', './assets/Floor.png');
+        this.load.image('wall', './assets/Wall.png');
+        this.load.image('wallfloral', './assets/WallFloral.png');
+        this.load.image('window', './assets/Window.png');
     }
 
     create() {
         this.velocity= 200;
 
-        this.map1 = this.add.tileSprite(
-            320,
-            game.config.height,
-            640,
-            960,
-            'map1'
-        );
+
+        const map = this.add.tilemap("tilemap");
+        const tileset1 = map.addTilesetImage("Floor", "floor");
+        const tileset2 = map.addTilesetImage("Wall", "wall");
+        const tileset3 = map.addTilesetImage("WallFloral", "wallfloral");
+        const tileset4 = map.addTilesetImage("Window", "window");
+        const groundLayer = map.createLayer("Tile Layer 1", [tileset1, tileset2, tileset3, tileset4], 0, 0);
+
+        groundLayer.setCollisionByProperty({ 
+            collides: true 
+        });
 
         this.stone = new Stone(
             this,
@@ -28,6 +37,12 @@ class Play extends Phaser.Scene {
         );
 
         this.princess= this.physics.add.sprite(borderUISize + borderPadding + 315, game.config.height - borderUISize*10, 'princessFront',);
+
+        this.physics.add.collider(this.princess, groundLayer);
+        this.physics.add.overlap(this.princess, groundLayer, (obj1, obj2) => {
+            console.log("printing");
+        });
+
 
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);

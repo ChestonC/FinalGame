@@ -4,7 +4,7 @@
      "export":
         {
          "format":"json",
-         "target":"..\/startmap.json"
+         "target":"..\/newstartmap.json"
         }
     },
  "height":40,
@@ -25,6 +25,12 @@
  "nextlayerid":2,
  "nextobjectid":1,
  "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"collides",
+         "type":"bool",
+         "value":true
+        }],
  "renderorder":"right-down",
  "tiledversion":"1.6.0",
  "tileheight":15,
@@ -32,7 +38,7 @@
         {
          "columns":1,
          "firstgid":1,
-         "image":"TileAssets\/Floor.png",
+         "image":"..\/..\/..\/..\/..\/Downloads\/TileAssets\/Floor.png",
          "imageheight":15,
          "imagewidth":15,
          "margin":0,
@@ -45,7 +51,7 @@
         {
          "columns":1,
          "firstgid":2,
-         "image":"TileAssets\/Wall.png",
+         "image":"..\/..\/..\/..\/..\/Downloads\/TileAssets\/Wall.png",
          "imageheight":15,
          "imagewidth":15,
          "margin":0,
@@ -53,12 +59,22 @@
          "spacing":0,
          "tilecount":1,
          "tileheight":15,
+         "tiles":[
+                {
+                 "id":0,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }],
          "tilewidth":15
         }, 
         {
          "columns":1,
          "firstgid":3,
-         "image":"TileAssets\/WallFloral.png",
+         "image":"..\/..\/..\/..\/..\/Downloads\/TileAssets\/WallFloral.png",
          "imageheight":15,
          "imagewidth":15,
          "margin":0,
@@ -66,12 +82,22 @@
          "spacing":0,
          "tilecount":1,
          "tileheight":15,
+         "tiles":[
+                {
+                 "id":0,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }],
          "tilewidth":15
         }, 
         {
          "columns":1,
          "firstgid":4,
-         "image":"TileAssets\/Window.png",
+         "image":"..\/..\/..\/..\/..\/Downloads\/TileAssets\/Window.png",
          "imageheight":15,
          "imagewidth":15,
          "margin":0,
@@ -79,6 +105,16 @@
          "spacing":0,
          "tilecount":1,
          "tileheight":15,
+         "tiles":[
+                {
+                 "id":0,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }],
          "tilewidth":15
         }],
  "tilewidth":15,
