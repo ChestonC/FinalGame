@@ -39,9 +39,7 @@ class Play extends Phaser.Scene {
         this.princess= this.physics.add.sprite(borderUISize + borderPadding + 315, game.config.height - borderUISize*10, 'princessFront',);
 
         this.physics.add.collider(this.princess, groundLayer);
-        this.physics.add.overlap(this.princess, groundLayer, (obj1, obj2) => {
-            console.log("printing");
-        });
+        
 
 
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
