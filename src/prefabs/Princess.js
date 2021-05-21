@@ -6,9 +6,11 @@ class Princess extends Phaser.GameObjects.Sprite {
         xSpeed = 0;
         ySpeed = 0;
     }
+
     preload() {
-        this.load.image('princess', './assets/princessFront.png');
+        
     }
+    
     update() {
 
     }
