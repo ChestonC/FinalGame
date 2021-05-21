@@ -5,9 +5,11 @@ class Play extends Phaser.Scene {
 
     preload() {
         this.load.path = "./assets/";
-        this.load.spritesheet("spritesheet", "spritesheet.png", {
+        this.load.spritesheet("spritesheet", "castle_sheet.png", {
             frameWidth: 28,
-            frameHeight: 28
+            frameHeight: 28,
+            margin: 1,
+            spacing: 2
         });
         this.load.tilemapTiledJSON("map", "floor1.json");
     }
@@ -19,7 +21,7 @@ class Play extends Phaser.Scene {
 
         // loading map & layers
         const map = this.add.tilemap("map");
-        const tileset = map.addTilesetImage("spritesheet", "spritesheet");
+        const tileset = map.addTilesetImage("castle_sheet", "spritesheet");
         const groundLayer = map.createLayer("Ground", tileset, 0, 0);
         const wallLayer = map.createLayer("Walls", tileset, 0, 0);
         const furnitureLayer = map.createLayer("Furniture", tileset, 0, 0);
@@ -141,12 +143,10 @@ class Play extends Phaser.Scene {
         if(this.cursors.right.isDown) {
             this.princess.setVelocityX(this.velocity);
             this.princess.play('walkright', true);
-            this.princess.chain('idleright');
             this.x0 = false;
         } else if(this.cursors.left.isDown) {
             this.princess.setVelocityX(-this.velocity);
             this.princess.play('walkleft', true);
-            this.princess.chain('idleleft');
             this.x0 = false;
         } else {
             this.princess.body.velocity.x = 0;
@@ -155,12 +155,10 @@ class Play extends Phaser.Scene {
         if(this.cursors.down.isDown) {
             this.princess.setVelocityY(this.velocity);
             this.princess.play('walkdown', true);
-            this.princess.chain('idledown');
             this.y0 = false;
         } else if(this.cursors.up.isDown) {
             this.princess.setVelocityY(-this.velocity);
             this.princess.play('walkup', true);
-            this.princess.chain('idleup');
             this.y0 = false;
         } else {
             this.princess.body.velocity.y = 0;
