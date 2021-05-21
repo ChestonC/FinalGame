@@ -34,6 +34,20 @@ class Play extends Phaser.Scene {
             collides: true 
         });
 
+        // generate stones from map
+        this.stones = map.createFromObjects("Objects", {
+            name: "stone",
+            key: "spritesheet",
+            frame: 95
+        });
+
+        // attach physics to the stones
+        this.physics.world.enable(this.stones, Phaser.Physics.Arcade.STATIC_BODY);
+        this.stones.map((stone) => {
+            stone.body.setCircle(4).setOffset(4,4);
+        });
+        this.stoneGroup = this.add.group(this.stones);
+
         // player spawn
         const playerSpawn = map.findObject("Objects", obj => obj.name === "Player Spawn");
         this.princess = this.physics.add.sprite(playerSpawn.x, playerSpawn.y, "spritesheet", 83);
@@ -41,40 +55,37 @@ class Play extends Phaser.Scene {
         // set player physics properties
         this.princess.body.setCollideWorldBounds(true);
 
-        this.physics.add.collider(this.princess, wallLayer);
-        this.physics.add.collider(this.princess, furnitureLayer);
-
         // player animations
 
         // idling
-        this.anims.create({
-            key: 'idledown',
-            defaultTextureKey: 'spritesheet',
-            frames: [
-                { frame: 83 }
-            ]
-        });
-        this.anims.create({
-            key: 'idleright',
-            defaultTextureKey: 'spritesheet',
-            frames: [
-                { frame: 86 }
-            ]
-        });
-        this.anims.create({
-            key: 'idleleft',
-            defaultTextureKey: 'spritesheet',
-            frames: [
-                { frame: 89 }
-            ]
-        });
-        this.anims.create({
-            key: 'idleup',
-            defaultTextureKey: 'spritesheet',
-            frames: [
-                { frame: 92 }
-            ]
-        });
+        // this.anims.create({
+        //     key: 'idledown',
+        //     defaultTextureKey: 'spritesheet',
+        //     frames: [
+        //         { frame: 83 }
+        //     ]
+        // });
+        // this.anims.create({
+        //     key: 'idleright',
+        //     defaultTextureKey: 'spritesheet',
+        //     frames: [
+        //         { frame: 86 }
+        //     ]
+        // });
+        // this.anims.create({
+        //     key: 'idleleft',
+        //     defaultTextureKey: 'spritesheet',
+        //     frames: [
+        //         { frame: 89 }
+        //     ]
+        // });
+        // this.anims.create({
+        //     key: 'idleup',
+        //     defaultTextureKey: 'spritesheet',
+        //     frames: [
+        //         { frame: 92 }
+        //     ]
+        // });
 
         // walking
         this.anims.create({
@@ -126,15 +137,28 @@ class Play extends Phaser.Scene {
             repeat: -1
         });
 
-        // init player animation
-        this.princess.anims.play('idledown');
+        // define world limit
+        this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels);
+        
+        this.physics.add.collider(this.princess, wallLayer);
+        this.physics.add.collider(this.princess, furnitureLayer);
+
+        // remove stone when the player is on it AND they press shift.
+        this.physics.add.overlap(this.princess, this.stoneGroup, (obj1, obj2) => {
+            if(this.cursors.shift.isDown) {
+                obj2.destroy();
+                this.sound.play('collect');
+            }
+        })
 
         // define keys
-        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         this.cursors= this.input.keyboard.createCursorKeys();
+
+        //sets camera to follow player
+        this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+        this.cameras.main.setZoom(4);
+        this.cameras.main.startFollow(this.princess);
+        // this.cameras.main.setDeadzone(50, 50); // camera deadzone. might be cool?
     }
 
     update() {
@@ -166,29 +190,6 @@ class Play extends Phaser.Scene {
         }
         if(this.x0 && this.y0) {
             this.princess.stop();
-        }
-
-        //sets camera to follow player
-        this.cameras.main.setBounds(0, 0, 640, 480);
-        this.cameras.main.setZoom(4);
-        this.cameras.main.startFollow(this.princess);
-
-        // temporary: makes stone invisible on contact
-        // if(this.checkCollision(this.princess, this.stone)){
-        //     this.stone.alpha = 0;
-        //     this.sound.play('collect');
-        // }
-    }
-
-    checkCollision(princess, stone) {
-        if (princess.x < stone.x + stone.width && 
-            princess.x + princess.width > stone.x && 
-            princess.y < stone.y + stone.height &&
-            princess.height + princess.y > stone.y) {
-
-            return true;
-        } else {
-            return false;
         }
     }
 }

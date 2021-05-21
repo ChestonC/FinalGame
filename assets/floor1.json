@@ -71,7 +71,19 @@
                  "visible":true,
                  "width":0,
                  "x":126,
-                 "y":163.333333333333
+                 "y":163.333
+                }, 
+                {
+                 "gid":96,
+                 "height":28,
+                 "id":3,
+                 "name":"stone",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":28,
+                 "x":77.6666666666667,
+                 "y":127.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -80,7 +92,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":2,
+ "nextobjectid":4,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.6.0",
