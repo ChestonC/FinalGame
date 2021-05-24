@@ -7,7 +7,7 @@ class Play extends Phaser.Scene {
         this.load.image('map1', './assets/testmap.png');
         this.load.image('stone', './assets/teststone.png');
         this.load.image('princessFront', './assets/PrincessFront.png');
-        this.load.tilemapTiledJSON('tilemap', './assets/startmap.json');
+        this.load.tilemapTiledJSON('tilemap', './assets/tilemap1.json');
         this.load.image('floor', './assets/Floor.png');
         this.load.image('wall', './assets/Wall.png');
         this.load.image('wallfloral', './assets/WallFloral.png');
@@ -19,13 +19,16 @@ class Play extends Phaser.Scene {
 
 
         const map = this.add.tilemap("tilemap");
-        const tileset1 = map.addTilesetImage("Floor", "floor");
-        const tileset2 = map.addTilesetImage("Wall", "wall");
-        const tileset3 = map.addTilesetImage("WallFloral", "wallfloral");
-        const tileset4 = map.addTilesetImage("Window", "window");
-        const groundLayer = map.createLayer("Tile Layer 1", [tileset1, tileset2, tileset3, tileset4], 0, 0);
-
+        const tileset = map.addTilesetImage("Tileset", "tileset");
+        // const tileset2 = map.addTilesetImage("Wall", "wall");
+        // const tileset3 = map.addTilesetImage("WallFloral", "wallfloral");
+        // const tileset4 = map.addTilesetImage("Window", "window");
+        const groundLayer = map.createLayer("Tile Layer", tileset, 0, 0);
+        const secondLayer = map.createLayer("Tile Layer 2", tileset, 0, 0);
         groundLayer.setCollisionByProperty({ 
+            collides: true 
+        });
+        secondLayer.setCollisionByProperty({ 
             collides: true 
         });
 
