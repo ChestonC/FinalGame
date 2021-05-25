@@ -37,7 +37,7 @@ class Play extends Phaser.Scene {
 
         // player spawn
         const playerSpawn = map.findObject("Object Layer", obj => obj.name === "Spawn");
-        this.princess = this.physics.add.sprite(playerSpawn.x, playerSpawn.y, "tilemap", 83);
+        this.princess = this.physics.add.sprite(playerSpawn.x, playerSpawn.y, "tileset", 83);
 
         this.stone = new Stone(
             this,
