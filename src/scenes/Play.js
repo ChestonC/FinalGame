@@ -8,10 +8,13 @@ class Play extends Phaser.Scene {
         this.load.image('stone', './assets/teststone.png');
         this.load.image('princessFront', './assets/PrincessFront.png');
         this.load.tilemapTiledJSON('tilemap', './assets/tilemap1.json');
-        this.load.image('floor', './assets/Floor.png');
-        this.load.image('wall', './assets/Wall.png');
-        this.load.image('wallfloral', './assets/WallFloral.png');
-        this.load.image('window', './assets/Window.png');
+        this.load.spritesheet("tileset", "./assets/tiles.png", {
+            frameWidth: 28,
+            frameHeight: 28,
+            margin: 1,
+            spacing: 2
+        });
+        
     }
 
     create() {
@@ -32,6 +35,10 @@ class Play extends Phaser.Scene {
             collides: true 
         });
 
+        // player spawn
+        const playerSpawn = map.findObject("Object Layer", obj => obj.name === "Spawn");
+        this.princess = this.physics.add.sprite(playerSpawn.x, playerSpawn.y, "tilemap", 83);
+
         this.stone = new Stone(
             this,
             borderUISize + borderPadding + 450,
@@ -39,7 +46,7 @@ class Play extends Phaser.Scene {
             'stone',
         );
 
-        this.princess= this.physics.add.sprite(borderUISize + borderPadding + 315, game.config.height - borderUISize*10, 'princessFront',);
+        // this.princess= this.physics.add.sprite(borderUISize + borderPadding + 315, game.config.height - borderUISize*10, 'princessFront',);
 
         this.physics.add.collider(this.princess, groundLayer);
         
