@@ -4,6 +4,8 @@ class Play extends Phaser.Scene {
     }
 
     preload() {
+        this.load.audio('menu', './assets/Final_Game_BGM_Menu.mp3')
+        this.load.audio('bgm', './assets/Final_Game_BGM.mp3')
         this.load.tilemapTiledJSON('tilemap', './assets/tilemap1.json');
         this.load.spritesheet("tileset", "./assets/tiles.png", {
             frameWidth: 28,
