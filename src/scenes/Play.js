@@ -17,6 +17,7 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        //bgm added
         let music = this.sound.add('bgm', {
             mute: false,
             volume: .3,

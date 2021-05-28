@@ -11,6 +11,8 @@ class Menu extends Phaser.Scene {
     }
     
     create() {
+
+        //menu music
         let munumusic = this.sound.add('menu', {
             mute: false,
             volume: .3,
@@ -64,6 +66,7 @@ class Menu extends Phaser.Scene {
     update() {
         if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
             this.scene.start('playScene')
+            //stop menu music when enter the game
             this.sound.stopAll();
 
         }
