@@ -19,6 +19,9 @@ class Play extends Phaser.Scene {
     create() {
         this.x0 = false;
         this.y0 = false;
+        this.xDirection = 0;
+        this.yDirection = 10;
+        this.stabTimer = this.time.delayedCall(500, () => {}, null, this);
         this.velocity= 120;
 
         const map = this.add.tilemap("tilemap");
@@ -105,12 +108,16 @@ class Play extends Phaser.Scene {
             this.princess.setVelocityX(this.velocity);
             if(this.y0) {
                 this.princess.play('walkright', true);
+                this.xDirection = 10;
+                this.yDirection = 0;
             }
             this.x0 = false;
         } else if(this.cursors.left.isDown) {
             this.princess.setVelocityX(-this.velocity);
             if(this.y0) {
                 this.princess.play('walkleft', true);
+                this.xDirection = -10;
+                this.yDirection = 0;
             }
             this.x0 = false;
         } else {
@@ -121,12 +128,16 @@ class Play extends Phaser.Scene {
             this.princess.setVelocityY(this.velocity);
             if(this.x0) {
                 this.princess.play('walkdown', true);
+                this.xDirection = 0;
+                this.yDirection = 10;
             }
             this.y0 = false;
         } else if(this.cursors.up.isDown) {
             this.princess.setVelocityY(-this.velocity);
             if(this.x0) {
                 this.princess.play('walkup', true);
+                this.xDirection = 0;
+                this.yDirection = -10;
             }
             this.y0 = false;
         } else {
@@ -144,7 +155,25 @@ class Play extends Phaser.Scene {
 
         //Attack animation
         if (Phaser.Input.Keyboard.JustDown(keyS)) {
-            this.dagger= this.physics.add.sprite( this.princess.x, this.princess.y+20, "tileset", 96);
+            if(this.stabTimer.elapsed == 500) {
+                this.velocity = 0;
+                this.princess.stop();
+                this.dagger= this.physics.add.sprite(this.princess.x+this.xDirection, this.princess.y+this.yDirection, "tileset", 96);
+                if(this.xDirection == 10) {
+                    this.dagger.setRotation(Math.PI/2);
+                } else if(this.xDirection == -10) {
+                    this.dagger.setRotation(-Math.PI/2);
+                } else if(this.yDirection == 10) {
+                    this.dagger.setRotation(Math.PI);
+                } else if(this.yDirection == -10) {
+                    this.dagger.setRotation(0);
+                }
+                this.stabTimer = this.time.delayedCall(200, () => {
+                    this.dagger.destroy();
+                    this.velocity = 120;
+                }, null, this);
+                this.stabTimer = this.time.delayedCall(500, () => {}, null, this);
+            }
         }
 
         //sets camera to follow player
