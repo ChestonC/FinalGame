@@ -12,8 +12,19 @@ class Menu extends Phaser.Scene {
     
     create() {
         // menu text config
+        let titleConfig = {
+            fontFamily: 'monospace',
+            fontSize: '36px',
+            color: '#FFFFFF',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
         let menuConfig = {
-            fontFamily: 'Courier',
+            fontFamily: 'monospace',
             fontSize: '26px',
             color: '#FFFFFF',
             align: 'right',
@@ -23,7 +34,7 @@ class Menu extends Phaser.Scene {
             },
             fixedWidth: 0
         }
-        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding, 'Castle Crawler', menuConfig);
+        this.add.text(borderUISize + borderPadding + 150, borderUISize + borderPadding, 'Castle Crawler', titleConfig);
 
         this.add.text(borderUISize + borderPadding + 130, borderUISize + borderPadding + 350, 'Press [SPACE] to Start', menuConfig);
 
