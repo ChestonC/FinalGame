@@ -4,8 +4,8 @@ class Play extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio('menu', './assets/Final_Game_BGM_Menu.mp3')
-        this.load.audio('bgm', './assets/Final_Game_BGM.mp3')
+        //this.load.audio('menubgm', './assets/Final_Game_BGM_Menu.mp3')
+        //this.load.audio('bgm', './assets/Final_Game_BGM.mp3')
         this.load.tilemapTiledJSON('tilemap', './assets/tilemap1.json');
         this.load.spritesheet("tileset", "./assets/tiles.png", {
             frameWidth: 28,
@@ -17,6 +17,18 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        let music = this.sound.add('bgm', {
+            mute: false,
+            volume: .3,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        });
+        music.play();
+
+
         this.velocity= 200;
 
         const map = this.add.tilemap("tilemap");
