@@ -36,6 +36,7 @@ class Play extends Phaser.Scene {
         this.xDirection = 0;
         this.yDirection = 10;
         this.stabTimer = this.time.delayedCall(500, () => {}, null, this);
+        this.stabbing = false;
         this.velocity= 120;
 
         const map = this.add.tilemap("tilemap");
@@ -61,9 +62,40 @@ class Play extends Phaser.Scene {
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        this.cursors= this.input.keyboard.createCursorKeys();
 
         // player animations
+        this.anims.create({
+            key: 'idledown',
+            defaultTextureKey: 'tileset',
+            frames: [
+                { frame: 83 }
+            ],
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'idleright',
+            defaultTextureKey: 'tileset',
+            frames: [
+                { frame: 86 }
+            ],
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'idleleft',
+            defaultTextureKey: 'tileset',
+            frames: [
+                { frame: 89 }
+            ],
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'idleup',
+            defaultTextureKey: 'tileset',
+            frames: [
+                { frame: 92 }
+            ],
+            repeat: -1
+        });
         this.anims.create({
             key: 'walkdown',
             defaultTextureKey: 'tileset',
@@ -118,48 +150,50 @@ class Play extends Phaser.Scene {
     update() {
 
         // Movement for princess
-        if(this.cursors.right.isDown) {
-            this.princess.setVelocityX(this.velocity);
-            if(this.y0) {
-                this.princess.play('walkright', true);
-                this.xDirection = 10;
-                this.yDirection = 0;
+        if(!this.stabbing) {
+            if(keyRIGHT.isDown) {
+                this.princess.setVelocityX(this.velocity);
+                if(this.y0) {
+                    this.princess.play('walkright', true);
+                    this.xDirection = 10;
+                    this.yDirection = 0;
+                }
+                this.x0 = false;
+            } else if(keyLEFT.isDown) {
+                this.princess.setVelocityX(-this.velocity);
+                if(this.y0) {
+                    this.princess.play('walkleft', true);
+                    this.xDirection = -10;
+                    this.yDirection = 0;
+                }
+                this.x0 = false;
+            } else {
+                this.princess.body.velocity.x = 0;
+                this.x0 = true;
             }
-            this.x0 = false;
-        } else if(this.cursors.left.isDown) {
-            this.princess.setVelocityX(-this.velocity);
-            if(this.y0) {
-                this.princess.play('walkleft', true);
-                this.xDirection = -10;
-                this.yDirection = 0;
+            if(keyDOWN.isDown) {
+                this.princess.setVelocityY(this.velocity);
+                if(this.x0) {
+                    this.princess.play('walkdown', true);
+                    this.xDirection = 0;
+                    this.yDirection = 10;
+                }
+                this.y0 = false;
+            } else if(keyUP.isDown) {
+                this.princess.setVelocityY(-this.velocity);
+                if(this.x0) {
+                    this.princess.play('walkup', true);
+                    this.xDirection = 0;
+                    this.yDirection = -10;
+                }
+                this.y0 = false;
+            } else {
+                this.princess.body.velocity.y = 0;
+                this.y0 = true;
             }
-            this.x0 = false;
-        } else {
-            this.princess.body.velocity.x = 0;
-            this.x0 = true;
-        }
-        if(this.cursors.down.isDown) {
-            this.princess.setVelocityY(this.velocity);
-            if(this.x0) {
-                this.princess.play('walkdown', true);
-                this.xDirection = 0;
-                this.yDirection = 10;
+            if(this.x0 && this.y0) {
+                this.princess.stop();
             }
-            this.y0 = false;
-        } else if(this.cursors.up.isDown) {
-            this.princess.setVelocityY(-this.velocity);
-            if(this.x0) {
-                this.princess.play('walkup', true);
-                this.xDirection = 0;
-                this.yDirection = -10;
-            }
-            this.y0 = false;
-        } else {
-            this.princess.body.velocity.y = 0;
-            this.y0 = true;
-        }
-        if(this.x0 && this.y0) {
-            this.princess.stop();
         }
 
         //Stone Drop
@@ -170,21 +204,27 @@ class Play extends Phaser.Scene {
         //Attack animation
         if (Phaser.Input.Keyboard.JustDown(keyS)) {
             if(this.stabTimer.elapsed == 500) {
-                this.velocity = 0;
-                this.princess.stop();
+                this.stabbing = true;
+                this.princess.disableBody();
                 this.dagger= this.physics.add.sprite(this.princess.x+this.xDirection, this.princess.y+this.yDirection, "tileset", 96);
                 if(this.xDirection == 10) {
                     this.dagger.setRotation(Math.PI/2);
+                    this.princess.play('idleright', true,);
                 } else if(this.xDirection == -10) {
                     this.dagger.setRotation(-Math.PI/2);
+                    this.princess.play('idleleft', true,);
                 } else if(this.yDirection == 10) {
                     this.dagger.setRotation(Math.PI);
+                    this.princess.play('idledown', true,);
                 } else if(this.yDirection == -10) {
                     this.dagger.setRotation(0);
+                    this.princess.play('idleup', true,);
                 }
                 this.stabTimer = this.time.delayedCall(200, () => {
                     this.dagger.destroy();
                     this.velocity = 120;
+                    this.princess.enableBody();
+                    this.stabbing = false;
                 }, null, this);
                 this.stabTimer = this.time.delayedCall(500, () => {}, null, this);
             }
