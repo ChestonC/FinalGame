@@ -40,6 +40,7 @@ class Play extends Phaser.Scene {
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.cursors= this.input.keyboard.createCursorKeys();
     }
 
@@ -62,8 +63,11 @@ class Play extends Phaser.Scene {
             this.princess.body.velocity.y= 0;
         }
 
+        if (Phaser.Input.Keyboard.JustDown(keyD)) {
+            this.stone= this.physics.add.sprite( this.princess.x, this.princess.y, "tileset", 95);
+        }
+
         //sets camera to follow player
-        this.cameras.main.setBounds(0, 0, 640, 480);
         this.cameras.main.setZoom(4);
         this.cameras.main.startFollow(this.princess);
     } 

@@ -28,3 +28,4 @@ let keyRIGHT;
 let keyUP;
 let keyDOWN;
 let keySPACE;
+let keyD;
