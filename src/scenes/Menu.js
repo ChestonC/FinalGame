@@ -23,15 +23,17 @@ class Menu extends Phaser.Scene {
             },
             fixedWidth: 0
         }
-        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding, 'Final Game', menuConfig);
+        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding, 'Castle Crawler', menuConfig);
 
         this.add.text(borderUISize + borderPadding + 130, borderUISize + borderPadding + 350, 'Press [SPACE] to Start', menuConfig);
 
         this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 100, 'Use arrow keys to move', menuConfig);
 
-        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 150, 'Try to escape each maze', menuConfig);
+        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 150, 'D to drop Stones', menuConfig);
 
-        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 200, 'Avoid enemies on the way', menuConfig);
+        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 200, 'Try to escape each maze', menuConfig);
+
+        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 250, 'Avoid enemies on the way', menuConfig);
 
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
