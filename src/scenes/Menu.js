@@ -11,6 +11,17 @@ class Menu extends Phaser.Scene {
     }
     
     create() {
+        let munumusic = this.sound.add('menu', {
+            mute: false,
+            volume: .3,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        });
+        munumusic.play();
+
         // menu text config
         let titleConfig = {
             fontFamily: 'fantasy',
@@ -53,6 +64,8 @@ class Menu extends Phaser.Scene {
     update() {
         if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
             this.scene.start('playScene')
+            this.sound.stopAll();
+
         }
     }
 
