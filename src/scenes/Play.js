@@ -17,7 +17,9 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-        this.velocity= 200;
+        this.x0 = false;
+        this.y0 = false;
+        this.velocity= 120;
 
         const map = this.add.tilemap("tilemap");
         const tileset = map.addTilesetImage("Tileset", "tileset");
@@ -43,25 +45,96 @@ class Play extends Phaser.Scene {
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.cursors= this.input.keyboard.createCursorKeys();
+
+        // player animations
+        this.anims.create({
+            key: 'walkdown',
+            defaultTextureKey: 'tileset',
+            frames: [
+                { frame: 84 },
+                { frame: 83 },
+                { frame: 85 },
+                { frame: 83 }
+            ],
+            frameRate: 7,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'walkright',
+            defaultTextureKey: 'tileset',
+            frames: [
+                { frame: 87 },
+                { frame: 86 },
+                { frame: 88 },
+                { frame: 86 }
+            ],
+            frameRate: 7,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'walkleft',
+            defaultTextureKey: 'tileset',
+            frames: [
+                { frame: 90 },
+                { frame: 89 },
+                { frame: 91 },
+                { frame: 89 }
+            ],
+            frameRate: 7,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'walkup',
+            defaultTextureKey: 'tileset',
+            frames: [
+                { frame: 93 },
+                { frame: 92 },
+                { frame: 94 },
+                { frame: 92 }
+            ],
+            frameRate: 7,
+            repeat: -1
+        });
+
     }
 
     update() {
-        // Movement for princess
 
+        // Movement for princess
         if(this.cursors.right.isDown) {
             this.princess.setVelocityX(this.velocity);
+            if(this.y0) {
+                this.princess.play('walkright', true);
+            }
+            this.x0 = false;
         } else if(this.cursors.left.isDown) {
             this.princess.setVelocityX(-this.velocity);
+            if(this.y0) {
+                this.princess.play('walkleft', true);
+            }
+            this.x0 = false;
         } else {
-            this.princess.body.velocity.x= 0;
+            this.princess.body.velocity.x = 0;
+            this.x0 = true;
         }
-
         if(this.cursors.down.isDown) {
             this.princess.setVelocityY(this.velocity);
+            if(this.x0) {
+                this.princess.play('walkdown', true);
+            }
+            this.y0 = false;
         } else if(this.cursors.up.isDown) {
             this.princess.setVelocityY(-this.velocity);
+            if(this.x0) {
+                this.princess.play('walkup', true);
+            }
+            this.y0 = false;
         } else {
-            this.princess.body.velocity.y= 0;
+            this.princess.body.velocity.y = 0;
+            this.y0 = true;
+        }
+        if(this.x0 && this.y0) {
+            this.princess.stop();
         }
 
         //Stone Drop
