@@ -53,6 +53,7 @@ class Play extends Phaser.Scene {
         // player spawn
         const playerSpawn = map.findObject("Objects", obj => obj.name === "Spawn");
         this.princess = this.physics.add.sprite(playerSpawn.x, playerSpawn.y, "tileset", 83);
+        this.princess.setDepth(1);
 
         this.physics.add.collider(this.princess, wallLayer);
 
@@ -216,6 +217,7 @@ class Play extends Phaser.Scene {
                 } else if(this.yDirection == 10) {
                     this.dagger.setRotation(Math.PI);
                     this.princess.play('idledown', true,);
+                    this.dagger.setDepth(2);
                 } else if(this.yDirection == -10) {
                     this.dagger.setRotation(0);
                     this.princess.play('idleup', true,);
@@ -225,6 +227,7 @@ class Play extends Phaser.Scene {
                     this.velocity = 120;
                     this.princess.enableBody();
                     this.stabbing = false;
+                    this.dagger.setDepth(0);
                 }, null, this);
                 this.stabTimer = this.time.delayedCall(500, () => {}, null, this);
             }
