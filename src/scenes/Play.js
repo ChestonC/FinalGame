@@ -30,6 +30,12 @@ class Play extends Phaser.Scene {
 
 
         this.velocity= 200;
+        this.x0 = false;
+        this.y0 = false;
+        this.xDirection = 0;
+        this.yDirection = 10;
+        this.stabTimer = this.time.delayedCall(500, () => {}, null, this);
+        this.velocity= 120;
 
         const map = this.add.tilemap("tilemap");
         const tileset = map.addTilesetImage("Tileset", "tileset");
@@ -55,25 +61,104 @@ class Play extends Phaser.Scene {
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.cursors= this.input.keyboard.createCursorKeys();
+
+        // player animations
+        this.anims.create({
+            key: 'walkdown',
+            defaultTextureKey: 'tileset',
+            frames: [
+                { frame: 84 },
+                { frame: 83 },
+                { frame: 85 },
+                { frame: 83 }
+            ],
+            frameRate: 7,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'walkright',
+            defaultTextureKey: 'tileset',
+            frames: [
+                { frame: 87 },
+                { frame: 86 },
+                { frame: 88 },
+                { frame: 86 }
+            ],
+            frameRate: 7,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'walkleft',
+            defaultTextureKey: 'tileset',
+            frames: [
+                { frame: 90 },
+                { frame: 89 },
+                { frame: 91 },
+                { frame: 89 }
+            ],
+            frameRate: 7,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'walkup',
+            defaultTextureKey: 'tileset',
+            frames: [
+                { frame: 93 },
+                { frame: 92 },
+                { frame: 94 },
+                { frame: 92 }
+            ],
+            frameRate: 7,
+            repeat: -1
+        });
+
     }
 
     update() {
-        // Movement for princess
 
+        // Movement for princess
         if(this.cursors.right.isDown) {
             this.princess.setVelocityX(this.velocity);
+            if(this.y0) {
+                this.princess.play('walkright', true);
+                this.xDirection = 10;
+                this.yDirection = 0;
+            }
+            this.x0 = false;
         } else if(this.cursors.left.isDown) {
             this.princess.setVelocityX(-this.velocity);
+            if(this.y0) {
+                this.princess.play('walkleft', true);
+                this.xDirection = -10;
+                this.yDirection = 0;
+            }
+            this.x0 = false;
         } else {
-            this.princess.body.velocity.x= 0;
+            this.princess.body.velocity.x = 0;
+            this.x0 = true;
         }
-
         if(this.cursors.down.isDown) {
             this.princess.setVelocityY(this.velocity);
+            if(this.x0) {
+                this.princess.play('walkdown', true);
+                this.xDirection = 0;
+                this.yDirection = 10;
+            }
+            this.y0 = false;
         } else if(this.cursors.up.isDown) {
             this.princess.setVelocityY(-this.velocity);
+            if(this.x0) {
+                this.princess.play('walkup', true);
+                this.xDirection = 0;
+                this.yDirection = -10;
+            }
+            this.y0 = false;
         } else {
-            this.princess.body.velocity.y= 0;
+            this.princess.body.velocity.y = 0;
+            this.y0 = true;
+        }
+        if(this.x0 && this.y0) {
+            this.princess.stop();
         }
 
         //Stone Drop
@@ -83,7 +168,25 @@ class Play extends Phaser.Scene {
 
         //Attack animation
         if (Phaser.Input.Keyboard.JustDown(keyS)) {
-            this.dagger= this.physics.add.sprite( this.princess.x, this.princess.y+20, "tileset", 96);
+            if(this.stabTimer.elapsed == 500) {
+                this.velocity = 0;
+                this.princess.stop();
+                this.dagger= this.physics.add.sprite(this.princess.x+this.xDirection, this.princess.y+this.yDirection, "tileset", 96);
+                if(this.xDirection == 10) {
+                    this.dagger.setRotation(Math.PI/2);
+                } else if(this.xDirection == -10) {
+                    this.dagger.setRotation(-Math.PI/2);
+                } else if(this.yDirection == 10) {
+                    this.dagger.setRotation(Math.PI);
+                } else if(this.yDirection == -10) {
+                    this.dagger.setRotation(0);
+                }
+                this.stabTimer = this.time.delayedCall(200, () => {
+                    this.dagger.destroy();
+                    this.velocity = 120;
+                }, null, this);
+                this.stabTimer = this.time.delayedCall(500, () => {}, null, this);
+            }
         }
 
         //sets camera to follow player
