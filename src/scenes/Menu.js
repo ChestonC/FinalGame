@@ -54,7 +54,7 @@ class Menu extends Phaser.Scene {
 
         this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 100, '- Use arrow keys to move', menuConfig);
 
-        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 150, '- D to drop Stones', menuConfig);
+        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 150, '- D to drop Stones, S to attack', menuConfig);
 
         this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 200, '- Try to escape each maze', menuConfig);
 
