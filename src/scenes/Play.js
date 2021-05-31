@@ -146,6 +146,8 @@ class Play extends Phaser.Scene {
             repeat: -1
         });
 
+        this.night = this.add.rectangle(0, 0, 10000, 10000, 0x000022, 0.7);
+        this.night.setDepth(5);
     }
 
     update() {
