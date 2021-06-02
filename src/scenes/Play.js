@@ -29,7 +29,6 @@ class Play extends Phaser.Scene {
         });
         music.play();
 
-
         this.velocity= 200;
         this.x0 = false;
         this.y0 = false;
@@ -144,6 +143,28 @@ class Play extends Phaser.Scene {
             ],
             frameRate: 7,
             repeat: -1
+        });
+
+        // Generate stones from map
+        this.stones = map.createFromObjects("Objects", {
+            name: "stone",
+            key: "tileset",
+            frame: 95
+        });
+
+        // attach physics to the stones
+        this.physics.world.enable(this.stones, Phaser.Physics.Arcade.STATIC_BODY);
+        this.stones.map((stone) => {
+            stone.body.setCircle(4).setOffset(4,4);
+        });
+        this.stoneGroup = this.add.group(this.stones);
+
+        // remove stone when the player is on it AND presses space
+        this.physics.add.overlap(this.princess, this.stoneGroup, (obj1, obj2) => {
+            if(this.cursors.shift.isDown) {
+                obj2.destroy();
+                this.sound.play('collect');
+            }
         });
 
         this.night = this.add.rectangle(0, 0, 10000, 10000, 0x000022, 0.7);
