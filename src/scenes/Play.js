@@ -57,21 +57,17 @@ class Play extends Phaser.Scene {
         this.princess.setDepth(1);
         this.physics.add.collider(this.princess, wallLayer);
         
-        // Generate enemies
-        const enemies = this.physics.add.group({
-            classType: Enemy
-        });
-        //enemies.get(playerSpawn.x + 56, playerSpawn.y, "tileset", 97); // test boi for easy viewing
-        enemies.get(1160, 1634, "tileset", 97);
-        enemies.get(768, 1464, "tileset", 97);
-        enemies.get(377, 873, "tileset", 97);
-        enemies.get(1215, 627, "tileset", 97);
-        enemies.get(2030, 903, "tileset", 97);
-        enemies.get(740, 2102, "tileset", 97);
-        enemies.get(1918, 1936, "tileset", 97);
-        enemies.get(1413, 2497, "tileset", 97);
-        enemies.get(2142, 2134, "tileset", 97);
-        enemies.get(2254, 2556, "tileset", 97);
+        new Enemy(this, playerSpawn.x + 56, playerSpawn.y, "tileset", 97); // test boi for easy viewing
+        // new Enemy(1160, 1634, "tileset", 97);
+        // new Enemy(768, 1464, "tileset", 97);
+        // new Enemy(377, 873, "tileset", 97);
+        // new Enemy(1215, 627, "tileset", 97);
+        // new Enemy(2030, 903, "tileset", 97);
+        // new Enemy(740, 2102, "tileset", 97);
+        // new Enemy(1918, 1936, "tileset", 97);
+        // new Enemy(1413, 2497, "tileset", 97);
+        // new Enemy(2142, 2134, "tileset", 97);
+        // new Enemy(2254, 2556, "tileset", 97);
 
         // Generate stones from map
         this.stones = map.createFromObjects("Objects", {
@@ -118,6 +114,7 @@ class Play extends Phaser.Scene {
         this.anims.create({ key: 'walkright', defaultTextureKey: 'tileset', frames: [ { frame: 87 }, { frame: 86 }, { frame: 88 }, { frame: 86 } ], frameRate: 7, repeat: -1 });
         this.anims.create({ key: 'walkleft', defaultTextureKey: 'tileset', frames: [ { frame: 90 }, { frame: 89 }, { frame: 91 }, { frame: 89 } ], frameRate: 7, repeat: -1 });
         this.anims.create({ key: 'walkup', defaultTextureKey: 'tileset', frames: [ { frame: 93 }, { frame: 92 }, { frame: 94 }, { frame: 92 } ], frameRate: 7, repeat: -1 });
+        
     }
 
     update() {
