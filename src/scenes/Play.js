@@ -37,6 +37,8 @@ class Play extends Phaser.Scene {
         this.stabTimer = this.time.delayedCall(500, () => {}, null, this);
         this.stabbing = false;
         this.velocity= 120;
+        this.stoneBag = 0;
+        document.getElementById("stoneDisplay").innerHTML = "Stones: " + this.stoneBag;
 
         const map = this.add.tilemap("tilemap");
         const tileset = map.addTilesetImage("Tileset", "tileset");
@@ -55,13 +57,6 @@ class Play extends Phaser.Scene {
         this.princess.setDepth(1);
 
         this.physics.add.collider(this.princess, wallLayer);
-
-        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 
         // player animations
         this.anims.create({
@@ -147,7 +142,7 @@ class Play extends Phaser.Scene {
 
         // Generate stones from map
         this.stones = map.createFromObjects("Objects", {
-            name: "stone",
+            name: "Stone",
             key: "tileset",
             frame: 95
         });
@@ -161,14 +156,24 @@ class Play extends Phaser.Scene {
 
         // remove stone when the player is on it AND presses space
         this.physics.add.overlap(this.princess, this.stoneGroup, (obj1, obj2) => {
-            if(this.cursors.shift.isDown) {
+            if(Phaser.Input.Keyboard.JustDown(keySPACE)) {
                 obj2.destroy();
                 this.sound.play('collect');
+                this.stoneBag += 1;
+                document.getElementById("stoneDisplay").innerHTML = "Stones: " + this.stoneBag;
             }
         });
 
         this.night = this.add.rectangle(0, 0, 10000, 10000, 0x000022, 0.7);
         this.night.setDepth(5);
+        
+        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     }
 
     update() {
@@ -222,7 +227,19 @@ class Play extends Phaser.Scene {
 
         //Stone Drop
         if (Phaser.Input.Keyboard.JustDown(keyD)) {
-            this.stone= this.physics.add.sprite( this.princess.x, this.princess.y, "tileset", 95);
+            if(this.stoneBag >= 1) {
+                this.stone = this.physics.add.sprite( this.princess.x, this.princess.y, "tileset", 95);
+                this.physics.add.overlap(this.princess, this.stone, (obj1, obj2) => {
+                    if(Phaser.Input.Keyboard.JustDown(keySPACE)) {
+                        obj2.destroy();
+                        this.sound.play('collect');
+                        this.stoneBag += 1;
+                        document.getElementById("stoneDisplay").innerHTML = "Stones: " + this.stoneBag;
+                    }
+                });
+                this.stoneBag -= 1;
+                document.getElementById("stoneDisplay").innerHTML = "Stones: " + this.stoneBag;
+            }
         }
 
         //Attack animation
