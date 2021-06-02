@@ -50,15 +50,17 @@ class Menu extends Phaser.Scene {
 
         this.add.text(borderUISize + borderPadding + 150, borderUISize + borderPadding, 'Castle Crawler', titleConfig);
 
-        this.add.text(borderUISize + borderPadding + 130, borderUISize + borderPadding + 350, 'Press [SPACE] to Start', menuConfig);
+        this.add.text(borderUISize + borderPadding + 130, borderUISize + borderPadding + 375, 'Press [SPACE] to Start', menuConfig);
 
         this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 100, '- Use arrow keys to move', menuConfig);
 
-        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 150, '- D to drop Stones, S to attack', menuConfig);
+        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 150, '- [SPACE] to pick up stones, [D] to drop Stones', menuConfig);
 
-        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 200, '- Try to escape each maze', menuConfig);
+        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 200, '- [S] to attack', menuConfig);
 
-        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 250, '- Avoid enemies on the way', menuConfig);
+        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 250, '- Try to escape each maze', menuConfig);
+
+        this.add.text(borderUISize + borderPadding - 20, borderUISize + borderPadding + 300, '- Avoid/Kill enemies on the way', menuConfig);
 
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
