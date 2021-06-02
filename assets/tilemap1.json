@@ -379,6 +379,30 @@
                  "width":28,
                  "x":1098,
                  "y":2562
+                }, 
+                {
+                 "height":0,
+                 "id":82,
+                 "name":"Enemy",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2030.33333333333,
+                 "y":923.212121212121
+                }, 
+                {
+                 "gid":79,
+                 "height":28,
+                 "id":85,
+                 "name":"Stairs",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":28,
+                 "x":2240,
+                 "y":2520
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -387,7 +411,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":68,
+ "nextobjectid":86,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.6.0",

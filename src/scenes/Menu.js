@@ -3,11 +3,11 @@ class Menu extends Phaser.Scene {
         super("menuscene");
     }
 
-
     preload() {
-        this.load.audio('collect', './assets/testcollect.mp3');
-        this.load.audio('menu', './assets/Final_Game_BGM_Menu.mp3')
-        this.load.audio('bgm', './assets/Final_Game_BGM.mp3')
+        this.load.path = "./assets/";
+        this.load.audio('collect', 'testcollect.mp3');
+        this.load.audio('menu', 'Final_Game_BGM_Menu.mp3')
+        this.load.audio('bgm', 'Final_Game_BGM.mp3')
     }
     
     create() {

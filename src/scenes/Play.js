@@ -6,14 +6,14 @@ class Play extends Phaser.Scene {
     preload() {
         //this.load.audio('menubgm', './assets/Final_Game_BGM_Menu.mp3')
         //this.load.audio('bgm', './assets/Final_Game_BGM.mp3')
-        this.load.tilemapTiledJSON('tilemap', './assets/tilemap1.json');
-        this.load.spritesheet("tileset", "./assets/tiles.png", {
+        this.load.path = "./assets/";
+        this.load.tilemapTiledJSON('tilemap', 'tilemap1.json');
+        this.load.spritesheet("tileset", "tiles.png", {
             frameWidth: 28,
             frameHeight: 28,
             margin: 1,
             spacing: 2
         });
-        
     }
 
     create() {
@@ -55,90 +55,23 @@ class Play extends Phaser.Scene {
         const playerSpawn = map.findObject("Objects", obj => obj.name === "Spawn");
         this.princess = this.physics.add.sprite(playerSpawn.x, playerSpawn.y, "tileset", 83);
         this.princess.setDepth(1);
-
         this.physics.add.collider(this.princess, wallLayer);
-
-        // player animations
-        this.anims.create({
-            key: 'idledown',
-            defaultTextureKey: 'tileset',
-            frames: [
-                { frame: 83 }
-            ],
-            repeat: -1
+        
+        // Generate enemies
+        const enemies = this.physics.add.group({
+            classType: Enemy
         });
-        this.anims.create({
-            key: 'idleright',
-            defaultTextureKey: 'tileset',
-            frames: [
-                { frame: 86 }
-            ],
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'idleleft',
-            defaultTextureKey: 'tileset',
-            frames: [
-                { frame: 89 }
-            ],
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'idleup',
-            defaultTextureKey: 'tileset',
-            frames: [
-                { frame: 92 }
-            ],
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'walkdown',
-            defaultTextureKey: 'tileset',
-            frames: [
-                { frame: 84 },
-                { frame: 83 },
-                { frame: 85 },
-                { frame: 83 }
-            ],
-            frameRate: 7,
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'walkright',
-            defaultTextureKey: 'tileset',
-            frames: [
-                { frame: 87 },
-                { frame: 86 },
-                { frame: 88 },
-                { frame: 86 }
-            ],
-            frameRate: 7,
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'walkleft',
-            defaultTextureKey: 'tileset',
-            frames: [
-                { frame: 90 },
-                { frame: 89 },
-                { frame: 91 },
-                { frame: 89 }
-            ],
-            frameRate: 7,
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'walkup',
-            defaultTextureKey: 'tileset',
-            frames: [
-                { frame: 93 },
-                { frame: 92 },
-                { frame: 94 },
-                { frame: 92 }
-            ],
-            frameRate: 7,
-            repeat: -1
-        });
+        //enemies.get(playerSpawn.x + 56, playerSpawn.y, "tileset", 97); // test boi for easy viewing
+        enemies.get(1160, 1634, "tileset", 97);
+        enemies.get(768, 1464, "tileset", 97);
+        enemies.get(377, 873, "tileset", 97);
+        enemies.get(1215, 627, "tileset", 97);
+        enemies.get(2030, 903, "tileset", 97);
+        enemies.get(740, 2102, "tileset", 97);
+        enemies.get(1918, 1936, "tileset", 97);
+        enemies.get(1413, 2497, "tileset", 97);
+        enemies.get(2142, 2134, "tileset", 97);
+        enemies.get(2254, 2556, "tileset", 97);
 
         // Generate stones from map
         this.stones = map.createFromObjects("Objects", {
@@ -146,6 +79,7 @@ class Play extends Phaser.Scene {
             key: "tileset",
             frame: 95
         });
+        this.physics.world
 
         // attach physics to the stones
         this.physics.world.enable(this.stones, Phaser.Physics.Arcade.STATIC_BODY);
@@ -174,6 +108,16 @@ class Play extends Phaser.Scene {
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+
+        // player animations
+        this.anims.create({ key: 'idledown', defaultTextureKey: 'tileset', frames: [ { frame: 83 } ], repeat: -1 });
+        this.anims.create({ key: 'idleright', defaultTextureKey: 'tileset', frames: [ { frame: 86 } ], repeat: -1 });
+        this.anims.create({ key: 'idleleft', defaultTextureKey: 'tileset', frames: [ { frame: 89 } ], repeat: -1 });
+        this.anims.create({ key: 'idleup', defaultTextureKey: 'tileset', frames: [ { frame: 92 } ], repeat: -1 });
+        this.anims.create({ key: 'walkdown', defaultTextureKey: 'tileset', frames: [ { frame: 84 }, { frame: 83 }, { frame: 85 }, { frame: 83 } ], frameRate: 7, repeat: -1 });
+        this.anims.create({ key: 'walkright', defaultTextureKey: 'tileset', frames: [ { frame: 87 }, { frame: 86 }, { frame: 88 }, { frame: 86 } ], frameRate: 7, repeat: -1 });
+        this.anims.create({ key: 'walkleft', defaultTextureKey: 'tileset', frames: [ { frame: 90 }, { frame: 89 }, { frame: 91 }, { frame: 89 } ], frameRate: 7, repeat: -1 });
+        this.anims.create({ key: 'walkup', defaultTextureKey: 'tileset', frames: [ { frame: 93 }, { frame: 92 }, { frame: 94 }, { frame: 92 } ], frameRate: 7, repeat: -1 });
     }
 
     update() {

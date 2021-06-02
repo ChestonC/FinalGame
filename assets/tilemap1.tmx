@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="28" tileheight="28" infinite="0" nextlayerid="5" nextobjectid="68">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="28" tileheight="28" infinite="0" nextlayerid="5" nextobjectid="86">
  <editorsettings>
   <chunksize width="28" height="28"/>
   <export target="tilemap1.json" format="json"/>
@@ -586,5 +586,9 @@
   <object id="65" name="Stone" gid="96" x="2592.06" y="1113.27" width="28" height="28"/>
   <object id="66" name="Stone" gid="96" x="2506" y="2012" width="28" height="28"/>
   <object id="67" name="Stone" gid="96" x="1098" y="2562" width="28" height="28"/>
+  <object id="82" name="Enemy" x="2030.33" y="923.212">
+   <point/>
+  </object>
+  <object id="85" name="Stairs" gid="79" x="2240" y="2520" width="28" height="28"/>
  </objectgroup>
 </map>
