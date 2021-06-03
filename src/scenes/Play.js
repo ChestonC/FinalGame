@@ -45,7 +45,7 @@ class Play extends Phaser.Scene {
         this.princess = new Princess(this, playerSpawn.x, playerSpawn.y, "tileset", 83);
         this.physics.add.collider(this.princess, wallLayer);
         
-        new Enemy(this, playerSpawn.x + 56, playerSpawn.y, "tileset", 97); // test boi for easy viewing
+        this.enemy10 = new Enemy(this, playerSpawn.x + 56, playerSpawn.y, "tileset", 97); // test boi for easy viewing
         // new Enemy(1160, 1634, "tileset", 97);
         // new Enemy(768, 1464, "tileset", 97);
         // new Enemy(377, 873, "tileset", 97);
@@ -105,14 +105,15 @@ class Play extends Phaser.Scene {
         this.anims.create({ key: 'walkup', defaultTextureKey: 'tileset', frames: [ { frame: 93 }, { frame: 92 }, { frame: 94 }, { frame: 92 } ], frameRate: 7, repeat: -1 });
         
         // Enemy Animations
-        this.anims.create({ key: "enwalkdown", defaultTextureKey: 'tileset', frames: [ { frame: 98 }, { frame: 97 }, { frame: 99 }, { frame: 97 } ], framerate: 5, repeat: -1 });
-        this.anims.create({ key: "enwalkleft", defaultTextureKey: 'tileset', frames: [ { frame: 101 }, { frame: 100 } ], framerate: 5, repeat: -1 });
-        this.anims.create({ key: "enwalkright", defaultTextureKey: 'tileset', frames: [ { frame: 103 }, { frame: 102 } ], framerate: 5, repeat: -1 });
-        this.anims.create({ key: "enwalkup", defaultTextureKey: 'tileset', frames: [ { frame: 105 }, { frame: 104 }, { frame: 106 }, { frame: 104 } ], framerate: 5, repeat: -1 });
+        this.anims.create({ key: 'enwalkdown', defaultTextureKey: 'tileset', frames: [ { frame: 98 }, { frame: 97 }, { frame: 99 }, { frame: 97 } ], frameRate: 4, repeat: -1 });
+        this.anims.create({ key: 'enwalkleft', defaultTextureKey: 'tileset', frames: [ { frame: 101 }, { frame: 100 } ], frameRate: 4, repeat: -1 });
+        this.anims.create({ key: 'enwalkright', defaultTextureKey: 'tileset', frames: [ { frame: 103 }, { frame: 102 } ], frameRate: 4, repeat: -1 });
+        this.anims.create({ key: 'enwalkup', defaultTextureKey: 'tileset', frames: [ { frame: 105 }, { frame: 104 }, { frame: 106 }, { frame: 104 } ], frameRate: 4, repeat: -1 });
     }
 
     update() {
         this.princess.update();
+        this.enemy10.update();
 
         //sets camera to follow player
         this.cameras.main.setZoom(4);
