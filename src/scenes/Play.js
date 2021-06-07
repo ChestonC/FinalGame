@@ -85,6 +85,9 @@ class Play extends Phaser.Scene {
         });
         this.stoneGroup = this.add.group(this.stones);
 
+        //Stairs spawn
+        this.stairs = new Stairs(80, 89, "tileset", 97);
+
         //change scene when collision on stairs
         this.physics.world.collide(this.princess, this.stairs, function(){
             game.scene.start('playScene');
