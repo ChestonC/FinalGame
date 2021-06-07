@@ -90,22 +90,27 @@ class Playmap2 extends Phaser.Scene {
 
         //Stairs spawn
         this.stairsSpawn = map.findObject("Objects", obj => obj.name === "Spawn");
-        this.stairs = new Stairs(this, this.stairsSpawn.x, this.stairsSpawn.y, "tileset", 78);
-        //this.physics.add.collider(this.stairs, this.wallLayer);
-
-        //this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
+        this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
         this.addPhysics(this.stairs);
 
-        //change scene when collision on stairs
-        // this.physics.add.collider(this.stairs, this.princess, (obj1, obj2) => {
-        //     obj2.x = this.playerSpawn.x;
-        //     obj2.y = this.playerSpawn.y;
-        // });
+        this.physics.world.collide(this.princess, this.stairs, function(){
+            game.scene.start('playScene2');
+            });
 
-         this.physics.world.collide(this.princess, this.stairs, function(){
-             game.scene.start('playScene2');
-             });
 
+        /*
+        code that not working
+        this.stairs = new Stairs(this, this.stairsSpawn.x, this.stairsSpawn.y, "tileset", 78);
+        this.physics.add.collider(this.stairs, this.wallLayer);
+
+        this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
+
+        change scene when collision on stairs
+        this.physics.add.collider(this.stairs, this.princess, (obj1, obj2) => {
+            obj2.x = this.playerSpawn.x;
+            obj2.y = this.playerSpawn.y;
+        });
+        */
 
 
 
