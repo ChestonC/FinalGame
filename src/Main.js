@@ -17,7 +17,7 @@ let config = {
             }
         }
     },
-    scene: [Menu, Play]
+    scene: [Menu, Play, Playmap2]
     
 }
 
