@@ -7,7 +7,7 @@ class Play extends Phaser.Scene {
         //this.load.audio('menubgm', './assets/Final_Game_BGM_Menu.mp3')
         //this.load.audio('bgm', './assets/Final_Game_BGM.mp3')
         this.load.path = "./assets/";
-        this.load.tilemapTiledJSON('tilemap', 'tilemap1.json');
+        this.load.tilemapTiledJSON('tilemap', 'tilemap1.json', 'tilemap2.json');
         this.load.spritesheet("tileset", "tiles.png", {
             frameWidth: 28,
             frameHeight: 28,
@@ -86,12 +86,18 @@ class Play extends Phaser.Scene {
         this.stoneGroup = this.add.group(this.stones);
 
         //Stairs spawn
-        //this.stairs = new Stairs(this, 80, 89, "tileset", 97);
+        this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
+        this.addPhysics(this.stairs);
 
         //change scene when collision on stairs
-        this.physics.world.collide(this.princess, this.stairs, function(){
-            game.scene.start('playScene');
-            });
+        // this.physics.add.collider(this.stairs, this.princess, (obj1, obj2) => {
+        //     obj2.x = this.playerSpawn.x;
+        //     obj2.y = this.playerSpawn.y;
+        // });
+
+        // this.physics.world.collide(this.princess, this.stairs, function(){
+        //     game.scene.start('tilemap2');
+        //     });
 
         // apply pickup and drop mechanics to stones generated from map
         this.physics.add.overlap(this.princess, this.stoneGroup, (obj1, obj2) => {
@@ -149,6 +155,7 @@ class Play extends Phaser.Scene {
         this.enemy7.update();
         this.enemy8.update();
         this.enemy9.update();
+        this.stairs.update();
         // this.enemy10.update();
     } 
 
