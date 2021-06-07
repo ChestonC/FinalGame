@@ -89,7 +89,11 @@ class Play extends Phaser.Scene {
 
 
         //Stairs spawn
-        this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
+        this.stairsSpawn = map.findObject("Objects", obj => obj.name === "Spawn");
+        this.stairs = new Stairs(this, this.stairsSpawn.x, this.stairsSpawn.y, "tileset", 78);
+        this.physics.add.collider(this.stairs, this.wallLayer);
+
+        //this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
         this.addPhysics(this.stairs);
 
         //change scene when collision on stairs
