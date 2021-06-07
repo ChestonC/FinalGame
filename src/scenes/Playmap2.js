@@ -30,7 +30,7 @@ class Playmap2 extends Phaser.Scene {
         music.play();
 
         // tileset and map declarations
-        const map = this.add.tilemap("tilemap2");
+        const map = this.add.tilemap("tilemap");
         const tileset = map.addTilesetImage("Tileset", "tileset");
         const groundLayer = map.createLayer("Ground", tileset, 0, 0);
         this.wallLayer = map.createLayer("Walls", tileset, 0, 0);

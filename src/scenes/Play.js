@@ -91,22 +91,26 @@ class Play extends Phaser.Scene {
         //Stairs spawn
         this.stairsSpawn = map.findObject("Objects", obj => obj.name === "Spawn");
         this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
-
-        //this.stairs = new Stairs(this, this.stairsSpawn.x, this.stairsSpawn.y, "tileset", 78);
-        //this.physics.add.collider(this.stairs, this.wallLayer);
-
-        //this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
         this.addPhysics(this.stairs);
-
-        //change scene when collision on stairs
-        // this.physics.add.collider(this.stairs, this.princess, (obj1, obj2) => {
-        //     obj2.x = this.playerSpawn.x;
-        //     obj2.y = this.playerSpawn.y;
-        // });
 
         this.physics.world.collide(this.princess, this.stairs, function(){
             game.scene.start('playScene2');
             });
+
+
+        /*
+        code that not working
+        this.stairs = new Stairs(this, this.stairsSpawn.x, this.stairsSpawn.y, "tileset", 78);
+        this.physics.add.collider(this.stairs, this.wallLayer);
+
+        this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
+
+        change scene when collision on stairs
+        this.physics.add.collider(this.stairs, this.princess, (obj1, obj2) => {
+            obj2.x = this.playerSpawn.x;
+            obj2.y = this.playerSpawn.y;
+        });
+        */
 
 
 
@@ -157,17 +161,19 @@ class Play extends Phaser.Scene {
 
     update() {
         this.princess.update();
-        this.enemy0.update();
-        this.enemy1.update();
-        this.enemy2.update();
-        this.enemy3.update();
-        this.enemy4.update();
-        this.enemy5.update();
-        this.enemy6.update();
-        this.enemy7.update();
-        this.enemy8.update();
-        this.enemy9.update();
+
+        // this.enemy0.update();
+        // this.enemy1.update();
+        // this.enemy2.update();
+        // this.enemy3.update();
+        // this.enemy4.update();
+        // this.enemy5.update();
+        // this.enemy6.update();
+        // this.enemy7.update();
+        // this.enemy8.update();
+        // this.enemy9.update();
         this.stairs.update();
+
         // this.enemy10.update();
     } 
 
