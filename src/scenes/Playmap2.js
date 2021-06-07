@@ -1,13 +1,13 @@
-class Play extends Phaser.Scene {
+class Playmap2 extends Phaser.Scene {
     constructor() {
-        super("playScene");
+        super("playScene2");
     }
 
     preload() {
         //this.load.audio('menubgm', './assets/Final_Game_BGM_Menu.mp3')
         //this.load.audio('bgm', './assets/Final_Game_BGM.mp3')
         this.load.path = "./assets/";
-        this.load.tilemapTiledJSON('tilemap', 'tilemap1.json');
+        this.load.tilemapTiledJSON('tilemap', 'tilemap2.json');
         this.load.spritesheet("tileset", "tiles.png", {
             frameWidth: 28,
             frameHeight: 28,
@@ -30,7 +30,7 @@ class Play extends Phaser.Scene {
         music.play();
 
         // tileset and map declarations
-        const map = this.add.tilemap("tilemap");
+        const map = this.add.tilemap("tilemap2");
         const tileset = map.addTilesetImage("Tileset", "tileset");
         const groundLayer = map.createLayer("Ground", tileset, 0, 0);
         this.wallLayer = map.createLayer("Walls", tileset, 0, 0);
@@ -90,9 +90,7 @@ class Play extends Phaser.Scene {
 
         //Stairs spawn
         this.stairsSpawn = map.findObject("Objects", obj => obj.name === "Spawn");
-        this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
-
-        //this.stairs = new Stairs(this, this.stairsSpawn.x, this.stairsSpawn.y, "tileset", 78);
+        this.stairs = new Stairs(this, this.stairsSpawn.x, this.stairsSpawn.y, "tileset", 78);
         //this.physics.add.collider(this.stairs, this.wallLayer);
 
         //this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
@@ -104,9 +102,9 @@ class Play extends Phaser.Scene {
         //     obj2.y = this.playerSpawn.y;
         // });
 
-        this.physics.world.collide(this.princess, this.stairs, function(){
-            game.scene.start('playScene2');
-            });
+         this.physics.world.collide(this.princess, this.stairs, function(){
+             game.scene.start('playScene2');
+             });
 
 
 

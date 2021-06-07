@@ -1,3 +1,7 @@
+/*
+Game made bu Tony Alegria, Cheston Chen, Israel Renteria, and Justin Juang
+*/
+
 let config = {
     type: Phaser.AUTO,
     width: 640,
