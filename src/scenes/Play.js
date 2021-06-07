@@ -85,6 +85,9 @@ class Play extends Phaser.Scene {
         });
         this.stoneGroup = this.add.group(this.stones);
 
+
+
+
         //Stairs spawn
         this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
         this.addPhysics(this.stairs);
@@ -98,6 +101,9 @@ class Play extends Phaser.Scene {
         // this.physics.world.collide(this.princess, this.stairs, function(){
         //     game.scene.start('tilemap2');
         //     });
+
+
+
 
         // apply pickup and drop mechanics to stones generated from map
         this.physics.add.overlap(this.princess, this.stoneGroup, (obj1, obj2) => {
