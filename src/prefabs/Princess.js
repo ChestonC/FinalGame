@@ -16,7 +16,7 @@ class Princess extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-
+    
         if(!this.stabbing) {
             this.move();
         }
