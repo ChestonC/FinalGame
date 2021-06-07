@@ -85,6 +85,11 @@ class Play extends Phaser.Scene {
         });
         this.stoneGroup = this.add.group(this.stones);
 
+        //change scene when collision on stairs
+        this.physics.world.collide(this.princess, this.stairs, function(){
+            game.scene.start('playScene');
+            });
+
         // apply pickup and drop mechanics to stones generated from map
         this.physics.add.overlap(this.princess, this.stoneGroup, (obj1, obj2) => {
             if(Phaser.Input.Keyboard.JustDown(keySPACE)) {
