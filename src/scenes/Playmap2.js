@@ -14,21 +14,20 @@ class Playmap2 extends Phaser.Scene {
             margin: 1,
             spacing: 2
         });
-        console.log("loading scene 2");
     }
 
     create() {
         //bgm added
-        let music = this.sound.add('bgm', {
-            mute: false,
-            volume: .3,
-            rate: 1,
-            detune: 0,
-            seek: 0,
-            loop: true,
-            delay: 0
-        });
-        music.play();
+        // let music = this.sound.add('bgm', {
+        //     mute: false,
+        //     volume: .3,
+        //     rate: 1,
+        //     detune: 0,
+        //     seek: 0,
+        //     loop: true,
+        //     delay: 0
+        // });
+        // music.play();
 
         // tileset and map declarations
         const map = this.add.tilemap("tilemap2");
@@ -87,13 +86,13 @@ class Playmap2 extends Phaser.Scene {
         this.stoneGroup = this.add.group(this.stones);
 
         //Stairs spawn
-        this.stairsSpawn = map.findObject("Objects", obj => obj.name === "Spawn");
-        this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
-        this.addPhysics(this.stairs);
+        this.stairsSpawn = map.findObject("Objects", obj => obj.name === "Stairs");
+        this.stairs = new Stairs(this, this.stairsSpawn.x, this.stairsSpawn.y, "tileset", 78);
+        //this.addPhysicsstairs(this.stairs);
 
-        this.physics.world.collide(this.princess, this.stairs, function(){
-            game.scene.start('playScene2');
-            });
+        // this.physics.world.collide(this.princess, this.stairs, function(){
+        //     game.scene.start('playScene2');
+        //     });
 
         // apply pickup and drop mechanics to stones generated from map
         this.physics.add.overlap(this.princess, this.stoneGroup, (obj1, obj2) => {
@@ -163,5 +162,12 @@ class Playmap2 extends Phaser.Scene {
             obj2.x = this.playerSpawn.x;
             obj2.y = this.playerSpawn.y;
         });
+    }
+
+    addPhysicsstairs(stairs){
+         this.physics.add.collider(this.stairs, this.princess, (obj1, obj2)=> {
+             //this.scene.start('playScene2');
+             //this.sound.stopAll();
+         })
     }
 }
