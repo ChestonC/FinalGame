@@ -49,26 +49,26 @@ class Play extends Phaser.Scene {
         // enemies spawn
         // this.enemy10 = new Enemy(this, this.playerSpawn.x + 56, this.playerSpawn.y, "tileset", 97); // test boi for easy viewing
         // this.addPhysics(this.enemy10);
-        // this.enemy0 = new Enemy(this, 1160, 1634, "tileset", 97);
-        // this.addPhysics(this.enemy0);
-        // this.enemy1 = new Enemy(this, 768, 1464, "tileset", 97);
-        // this.addPhysics(this.enemy1);
-        // this.enemy2 = new Enemy(this, 377, 873, "tileset", 97);
-        // this.addPhysics(this.enemy2);
-        // this.enemy3 = new Enemy(this, 1215, 627, "tileset", 97);
-        // this.addPhysics(this.enemy3);
-        // this.enemy4 = new Enemy(this, 2030, 903, "tileset", 97);
-        // this.addPhysics(this.enemy4);
-        // this.enemy5 = new Enemy(this, 740, 2102, "tileset", 97);
-        // this.addPhysics(this.enemy5);
-        // this.enemy6 = new Enemy(this, 1918, 1936, "tileset", 97);
-        // this.addPhysics(this.enemy6);
-        // this.enemy7 = new Enemy(this, 1413, 2497, "tileset", 97);
-        // this.addPhysics(this.enemy7);
-        // this.enemy8 = new Enemy(this, 2142, 2134, "tileset", 97);
-        // this.addPhysics(this.enemy8);
-        // this.enemy9 = new Enemy(this, 2254, 2556, "tileset", 97);
-        // this.addPhysics(this.enemy9);
+        this.enemy0 = new Enemy(this, 1160, 1634, "tileset", 97);
+        this.addPhysics(this.enemy0);
+        this.enemy1 = new Enemy(this, 768, 1464, "tileset", 97);
+        this.addPhysics(this.enemy1);
+        this.enemy2 = new Enemy(this, 377, 873, "tileset", 97);
+        this.addPhysics(this.enemy2);
+        this.enemy3 = new Enemy(this, 1215, 627, "tileset", 97);
+        this.addPhysics(this.enemy3);
+        this.enemy4 = new Enemy(this, 2030, 903, "tileset", 97);
+        this.addPhysics(this.enemy4);
+        this.enemy5 = new Enemy(this, 740, 2102, "tileset", 97);
+        this.addPhysics(this.enemy5);
+        this.enemy6 = new Enemy(this, 1918, 1936, "tileset", 97);
+        this.addPhysics(this.enemy6);
+        this.enemy7 = new Enemy(this, 1413, 2497, "tileset", 97);
+        this.addPhysics(this.enemy7);
+        this.enemy8 = new Enemy(this, 2142, 2134, "tileset", 97);
+        this.addPhysics(this.enemy8);
+        this.enemy9 = new Enemy(this, 2254, 2556, "tileset", 97);
+        this.addPhysics(this.enemy9);
 
         // Generate stones from map
         this.stones = map.createFromObjects("Objects", {
@@ -137,16 +137,16 @@ class Play extends Phaser.Scene {
     update() {
         this.princess.update();
 
-        // this.enemy0.update();
-        // this.enemy1.update();
-        // this.enemy2.update();
-        // this.enemy3.update();
-        // this.enemy4.update();
-        // this.enemy5.update();
-        // this.enemy6.update();
-        // this.enemy7.update();
-        // this.enemy8.update();
-        // this.enemy9.update();
+        this.enemy0.update();
+        this.enemy1.update();
+        this.enemy2.update();
+        this.enemy3.update();
+        this.enemy4.update();
+        this.enemy5.update();
+        this.enemy6.update();
+        this.enemy7.update();
+        this.enemy8.update();
+        this.enemy9.update();
         this.stairs.update();
 
         // this.enemy10.update();
