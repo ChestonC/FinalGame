@@ -14,6 +14,7 @@ class Playmap2 extends Phaser.Scene {
             margin: 1,
             spacing: 2
         });
+        console.log("loading scene 2");
     }
 
     create() {
@@ -85,9 +86,6 @@ class Playmap2 extends Phaser.Scene {
         });
         this.stoneGroup = this.add.group(this.stones);
 
-
-
-
         //Stairs spawn
         this.stairsSpawn = map.findObject("Objects", obj => obj.name === "Spawn");
         this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
@@ -96,23 +94,6 @@ class Playmap2 extends Phaser.Scene {
         this.physics.world.collide(this.princess, this.stairs, function(){
             game.scene.start('playScene2');
             });
-
-
-        /*
-        code that not working
-        this.stairs = new Stairs(this, this.stairsSpawn.x, this.stairsSpawn.y, "tileset", 78);
-        this.physics.add.collider(this.stairs, this.wallLayer);
-
-        this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
-
-        change scene when collision on stairs
-        this.physics.add.collider(this.stairs, this.princess, (obj1, obj2) => {
-            obj2.x = this.playerSpawn.x;
-            obj2.y = this.playerSpawn.y;
-        });
-        */
-
-
 
         // apply pickup and drop mechanics to stones generated from map
         this.physics.add.overlap(this.princess, this.stoneGroup, (obj1, obj2) => {
