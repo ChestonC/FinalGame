@@ -91,7 +91,7 @@ class Play extends Phaser.Scene {
         //Stairs spawn
         this.stairsSpawn = map.findObject("Objects", obj => obj.name === "Stairs");
         this.stairs = new Stairs(this, 2240, 2520, "tileset", 78);
-        this.addPhysics(this.stairs);
+        this.addPhysicsstairs(this.stairs);
 
 
         this.physics.world.collide(this.princess, this.stairs, function(){
@@ -188,9 +188,9 @@ class Play extends Phaser.Scene {
         });
     }
 
-    // addPhysics(stairs){
-    //      this.physics.add.collider(this.stairs, this.princess, (obj1, obj2)=> {
-    //          game.scene.start('playScene');
-    //      })
-    // }
+    addPhysicsstairs(stairs){
+         this.physics.add.collider(this.stairs, this.princess, (obj1, obj2)=> {
+             game.scene.start('playScene');
+         })
+    }
 }
