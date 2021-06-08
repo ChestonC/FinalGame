@@ -190,7 +190,8 @@ class Play extends Phaser.Scene {
 
     addPhysicsstairs(stairs){
          this.physics.add.collider(this.stairs, this.princess, (obj1, obj2)=> {
-             game.scene.start('playScene');
+             game.scene.start('playScene2');
+             //this.sound.stopAll();
          })
     }
 }
